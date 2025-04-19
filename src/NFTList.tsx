@@ -1,6 +1,6 @@
 import React from "react";
 import { useCurrentAccount, useSuiClientQuery } from "@mysten/dapp-kit";
-import { SuiObjectData } from "@mysten/sui/client";
+
 import { Button, Flex, Heading, Text } from "@radix-ui/themes";
 import ClipLoader from "react-spinners/ClipLoader";
 
