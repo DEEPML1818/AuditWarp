@@ -1,5 +1,4 @@
 // src/pages/PDFViewer.tsx
-import React from "react";
 
 interface PDFViewerProps {
   url: string;
