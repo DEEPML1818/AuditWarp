@@ -1,5 +1,5 @@
 // MintNFT.tsx
-import React, { useState, ChangeEvent } from "react";
+import { useState, ChangeEvent } from "react";
 import { Transaction } from "@mysten/sui/transactions";
 import { Button, Container, Flex, Heading, Text } from "@radix-ui/themes";
 import { useSignAndExecuteTransaction, useSuiClient } from "@mysten/dapp-kit";
