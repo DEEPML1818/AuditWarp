@@ -4,7 +4,6 @@ import { Box, Container, Flex, Heading } from "@radix-ui/themes";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { WalletStatus } from "./WalletStatus";
-import MintNFT from "./MintNFT";
 import NFTList from "./NFTList";
 import AuditPage from "./AuditPage";
 import NetworkSwitcher from "./NetworkSwitcher";
