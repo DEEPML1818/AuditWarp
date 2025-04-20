@@ -44,8 +44,8 @@
 ### 1. Clone the Repo
 
 ```bash
-git clone https://github.com/your-org/auditwarp.git
-cd auditwarp
+git clone https://github.com/DEEPML1818/AuditWarp.git
+cd AuditWarp
 ```
 
 ### 2. Install Dependencies
@@ -59,11 +59,10 @@ yarn install
 ### 3. Create .env File
 
 ```bash
-OPENAI_API_KEY=your_openai_key
-PINATA_API_KEY=your_pinata_key
-PINATA_SECRET_API_KEY=your_pinata_secret
-NEXT_PUBLIC_SUI_RPC=https://fullnode.devnet.sui.io/
-WORMHOLE_RPC=https://wormhole-v2-mainnet.chainstacklabs.com
+NEXT_PUBLIC_OPENAI_KEY=       # your OpenAI secret key
+NEXT_PUBLIC_PINATA_API_KEY=          # your Pinata api key
+NEXT_PUBLIC_PINATA_SECRET_API_KEY=      # your Pinata secret key
+NEXT_PUBLIC_PACKAGE_ID=0x…         # your deployed Move package ID
 ```
 
 ### 4. Run Locally
