@@ -3,9 +3,8 @@
 
 ### 📄 Sui Deployment (Testnet)
 
-- **Sui Contract Address (Testnet):** `0x0d865f8b0ca4c353fbc142af6b74d88c4ec49d28c970b58c48b5599e1d314914`  
-- **Deployer Address (Testnet):** `0x768478578364d08dfc4e7c114a883602289256f0e603b64f58eb14ac288ab673`
-
+- **Sui Contract Address (Testnet):** [`0x0d865f8b0ca4c353fbc142af6b74d88c4ec49d28c970b58c48b5599e1d314914`](https://testnet.suivision.xyz/package/0x0d865f8b0ca4c353fbc142af6b74d88c4ec49d28c970b58c48b5599e1d314914?tab=Code)  
+- **Deployer Address (Testnet):** [`0x768478578364d08dfc4e7c114a883602289256f0e603b64f58eb14ac288ab673`](https://testnet.suivision.xyz/account/0x768478578364d08dfc4e7c114a883602289256f0e603b64f58eb14ac288ab673)
 
 ## 🧠 Architecture Overview
 
