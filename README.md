@@ -1,6 +1,10 @@
 # 🛡️ AuditWarp  
 **AI-Powered Smart Contract Audits for Move, Secured On-Chain with Sui + Cross-Chain Access via Wormhole**
 
+### 🚀 Live Demo / DApp Simulator
+
+Check out the live demo here: [🔗 AuditWarp DApp Simulator](https://your-dapp-link.com)
+
 ### 📄 Sui Deployment (Testnet)
 
 - **Sui Contract Address (Testnet):** [`0x0d865f8b0ca4c353fbc142af6b74d88c4ec49d28c970b58c48b5599e1d314914`](https://testnet.suivision.xyz/package/0x0d865f8b0ca4c353fbc142af6b74d88c4ec49d28c970b58c48b5599e1d314914?tab=Code)  
