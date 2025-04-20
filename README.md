@@ -3,7 +3,7 @@
 
 ### 🚀 Live Demo / DApp Simulator
 
-Check out the live demo here: [🔗 AuditWarp DApp Simulator](https://your-dapp-link.com)
+Check out the live demo here: [🔗 AuditWarp DApp Simulator](https://audit-warp.vercel.app/)
 
 ### 📄 Sui Deployment (Testnet)
 
