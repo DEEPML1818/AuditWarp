@@ -345,4 +345,4 @@ const WormholePage: React.FC = () => {
   );
 };
 
-export default WormholePage;
+export default WormholePage; 
