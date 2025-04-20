@@ -13,8 +13,8 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { PDFDocument } from "pdf-lib";
 import { create } from "ipfs-http-client";
-import { ethers } from "ethers";
-import { wormhole } from "@wormhole-foundation/sdk"; // if you want real Wormhole messages
+
+import { PlatformLoader, wormhole } from "@wormhole-foundation/sdk"; // if you want real Wormhole messages
 
 // Initialize IPFS client
 const ipfs = create({ url: "https://ipfs.infura.io:5001/api/v0" });
@@ -81,19 +81,160 @@ const WormholePage: React.FC = () => {
       // 3. (Optional) Publish a Wormhole message
       if (ethAccount) {
         setStatusMsg("📡 Sending Wormhole message…");
-        const wh = await wormhole("Testnet");
+        const wh = await wormhole("Testnet", {
+            length: 0,
+            pop: function (): PlatformLoader<any> | undefined {
+                throw new Error("Function not implemented.");
+            },
+            push: function (): number {
+                throw new Error("Function not implemented.");
+            },
+            concat: function (): PlatformLoader<any>[] {
+                throw new Error("Function not implemented.");
+            },
+            join: function (): string {
+                throw new Error("Function not implemented.");
+            },
+            reverse: function (): PlatformLoader<any>[] {
+                throw new Error("Function not implemented.");
+            },
+            shift: function (): PlatformLoader<any> | undefined {
+                throw new Error("Function not implemented.");
+            },
+            slice: function (_start?: number): PlatformLoader<any>[] {
+                throw new Error("Function not implemented.");
+            },
+            sort: function (): PlatformLoader<any>[] {
+                throw new Error("Function not implemented.");
+            },
+            splice: function (_start: number):[] {
+                throw new Error("Function not implemented.");
+            },
+            unshift: function (): number {
+                throw new Error("Function not implemented.");
+            },
+            indexOf: function (_searchElement: PlatformLoader<any>): number {
+                throw new Error("Function not implemented.");
+            },
+            lastIndexOf: function (_searchElement: PlatformLoader<any>): number {
+                throw new Error("Function not implemented.");
+            },
+            every: function <S extends PlatformLoader<any>>(_predicate: (value: PlatformLoader<any>, index: number, array: PlatformLoader<any>[]) => value is S): this is S[] {
+                throw new Error("Function not implemented.");
+            },
+            some: function (_predicate: (value: PlatformLoader<any>, index: number, array: PlatformLoader<any>[]) => unknown): boolean {
+                throw new Error("Function not implemented.");
+            },
+            forEach: function (_callbackfn: (value: PlatformLoader<any>, index: number, array: PlatformLoader<any>[]) => void): void {
+                throw new Error("Function not implemented.");
+            },
+            map: function <U>(_callbackfn: (value: PlatformLoader<any>, index: number, array: PlatformLoader<any>[]) => U): U[] {
+                throw new Error("Function not implemented.");
+            },
+            filter: function <S extends PlatformLoader<any>>(_predicate: (value: PlatformLoader<any>, index: number, array: PlatformLoader<any>[]) => value is S): S[] {
+                throw new Error("Function not implemented.");
+            },
+            reduce: function (): PlatformLoader<any> {
+                throw new Error("Function not implemented.");
+            },
+            reduceRight: function (): PlatformLoader<any> {
+                throw new Error("Function not implemented.");
+            },
+            find: function <S extends PlatformLoader<any>>(_predicate: (value: PlatformLoader<any>, index: number, obj: PlatformLoader<any>[]) => value is S): S | undefined {
+                throw new Error("Function not implemented.");
+            },
+            findIndex: function (_predicate: (value: PlatformLoader<any>, index: number, obj: PlatformLoader<any>[]) => unknown): number {
+                throw new Error("Function not implemented.");
+            },
+            fill: function (_value: PlatformLoader<any>): PlatformLoader<any>[] {
+                throw new Error("Function not implemented.");
+            },
+            copyWithin: function (_target: number, _start: number): PlatformLoader<any>[] {
+                throw new Error("Function not implemented.");
+            },
+            entries: function (): ArrayIterator<[number, PlatformLoader<any>]> {
+                throw new Error("Function not implemented.");
+            },
+            keys: function (): ArrayIterator<number> {
+                throw new Error("Function not implemented.");
+            },
+            values: function (): ArrayIterator<PlatformLoader<any>> {
+                throw new Error("Function not implemented.");
+            },
+            includes: function (_searchElement: PlatformLoader<any>): boolean {
+                throw new Error("Function not implemented.");
+            },
+            flatMap: function <U, This = undefined>(_callback: (this: This, value: PlatformLoader<any>, index: number, array: PlatformLoader<any>[]) => U | readonly U[]): U[] {
+                throw new Error("Function not implemented.");
+            },
+            flat: function <A, D extends number = 1>(this: A): FlatArray<A, D>[] {
+                throw new Error("Function not implemented.");
+            },
+            [Symbol.iterator]: function (): ArrayIterator<PlatformLoader<any>> {
+                throw new Error("Function not implemented.");
+            },
+            [Symbol.unscopables]: {
+                length: false,
+                toString: false,
+                toLocaleString: false,
+                pop: false,
+                push: false,
+                concat: false,
+                join: false,
+                reverse: false,
+                shift: false,
+                slice: false,
+                sort: false,
+                splice: false,
+                unshift: false,
+                indexOf: false,
+                lastIndexOf: false,
+                every: false,
+                some: false,
+                forEach: false,
+                map: false,
+                filter: false,
+                reduce: false,
+                reduceRight: false,
+                find: false,
+                findIndex: false,
+                fill: false,
+                copyWithin: false,
+                entries: false,
+                keys: false,
+                values: false,
+                includes: false,
+                flatMap: false,
+                flat: false,
+                at: false,
+            },
+            at: function (): PlatformLoader<any> | undefined {
+                throw new Error("Function not implemented.");
+            }
+        }); // Just pass an empty config for now
+
         const ethChain = wh.getChain("Ethereum");
-        const provider = new ethers.providers.Web3Provider((window as any).ethereum);
-        const signer = provider.getSigner();
+        const provider = (window as any).ethereum;
+        if (!provider) {
+          throw new Error("Ethereum provider not found");
+        }
+        const signer = await provider.getSigner();
+        
+        const core = await ethChain.getWormholeCore();
+
+        // Construct the payload
         const payload = JSON.stringify({
-          contractCode: codeToAudit,
-          userAddress: suiRecipient,
+        contractCode: codeToAudit,
+        userAddress: suiRecipient,
         });
-        const msg = await ethChain.publishMessage(signer, payload, {
-          consistencyLevel: 1,
-        });
-        console.log("Wormhole tx:", msg.txId);
-        setStatusMsg(`✅ Wormhole tx: ${msg.txId}`);
+
+        // Now send the message
+        const msg = core.publishMessage(signer, payload, 1, Date.now()); // Passing consistencyLevel directly as a number
+
+        console.log("Wormhole tx:", msg.return);
+        setStatusMsg(`✅ Wormhole tx: ${msg.return}`);
+        console.log("Wormhole tx:", msg.return);
+        setStatusMsg(`✅ Wormhole tx: ${msg.return}`);
       } else {
         setStatusMsg("⚠️ MetaMask not connected — skipping Wormhole");
       }
