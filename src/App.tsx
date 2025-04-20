@@ -1,17 +1,19 @@
+// src/App.jsx
 import React, { useState } from "react";
 import { SuiClientProvider, ConnectButton } from "@mysten/dapp-kit";
-import { Box, Container, Flex, Heading } from "@radix-ui/themes";
+import { Box, Container, Flex, Heading, Button } from "@radix-ui/themes";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+
 import { WalletStatus } from "./WalletStatus";
-import MintNFT from "./MintNFT";
-import NFTList from "./NFTList";
 import AuditPage from "./AuditPage";
+import NFTList from "./NFTList";
+import WormholePage from "./wormhole";    // Your single‑file wormhole UI
 import NetworkSwitcher from "./NetworkSwitcher";
 
 const App: React.FC = () => {
-  // Store the current network state.
   const [network, setNetwork] = useState<"testnet" | "mainnet">("testnet");
+  const [page, setPage] = useState<"home" | "audit">("home");
 
   return (
     <SuiClientProvider
@@ -21,27 +23,38 @@ const App: React.FC = () => {
       }}
       defaultNetwork={network}
     >
-      {/* Header */}
+      {/* Header with Tabs */}
       <Flex
         position="sticky"
         px="4"
         py="2"
         justify="between"
-        style={{
-          borderBottom: "1px solid var(--gray-a2)",
-        }}
+        align="center"
+        style={{ borderBottom: "1px solid var(--gray-a2)" }}
       >
         <Box>
-          <Heading>dApp Starter Template</Heading>
+          <Heading>AuditWarp</Heading>
         </Box>
-        <Box>
+
+        <Flex gap="2" align="center">
+          <Button
+            variant={page === "home" ? "solid" : "soft"}
+            onClick={() => setPage("home")}
+          >
+            Home
+          </Button>
+          <Button
+            variant={page === "audit" ? "solid" : "soft"}
+            onClick={() => setPage("audit")}
+          >
+            Audit
+          </Button>
           <ConnectButton />
-        </Box>
+        </Flex>
       </Flex>
 
       {/* Main Content */}
       <Container>
-        {/* Network switcher component */}
         <NetworkSwitcher currentNetwork={network} setNetwork={setNetwork} />
         <Container
           mt="5"
@@ -49,14 +62,18 @@ const App: React.FC = () => {
           px="4"
           style={{ background: "var(--gray-a2)", minHeight: 500 }}
         >
-          {/* Wallet status and additional components */}
-          <WalletStatus />
-          <AuditPage />
-          <NFTList />
+          {page === "home" ? (
+            <>
+              <WalletStatus />
+              <AuditPage />
+              <NFTList />
+            </>
+          ) : (
+            <WormholePage />
+          )}
         </Container>
       </Container>
 
-      {/* Toast notifications container */}
       <ToastContainer position="top-right" autoClose={5000} />
     </SuiClientProvider>
   );
