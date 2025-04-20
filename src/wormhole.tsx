@@ -24,7 +24,7 @@ const WormholePage: React.FC = () => {
   const [network, setNetwork] = useState<"testnet" | "mainnet">("testnet");
   // Which view
   const [showWormholeUI, setShowWormholeUI] = useState(false);
-
+  console.log(setNetwork)
   // MetaMask state
   const [ethAccount, setEthAccount] = useState<string | null>(null);
 
