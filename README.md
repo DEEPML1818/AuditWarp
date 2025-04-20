@@ -1,6 +1,12 @@
 # 🛡️ AuditWarp  
 **AI-Powered Smart Contract Audits for Move, Secured On-Chain with Sui + Cross-Chain Access via Wormhole**
 
+### 📄 Sui Deployment (Testnet)
+
+- **Sui Contract Address (Testnet):** `0x...`  
+- **Deployer Address (Testnet):** `0x...`
+
+
 ## 🧠 Architecture Overview
 
 - **User** sends code to **Frontend**  
