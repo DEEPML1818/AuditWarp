@@ -7,7 +7,7 @@ import { PDFDocument } from "pdf-lib";
 import { create } from "ipfs-http-client";
 import { useWeb3React } from "@web3-react/core";
 import { InjectedConnector } from "@web3-react/injected-connector";
-import { ethers } from "ethers";
+
 
 // Initialize IPFS client
 const ipfs = create({ url: "https://ipfs.infura.io:5001/api/v0" });
@@ -21,7 +21,7 @@ const WormholePage: React.FC = () => {
 
   const [network, setNetwork] = useState<"testnet" | "mainnet">("testnet");
   const [showWormholeUI, setShowWormholeUI] = useState(false);
-
+  console.log(setNetwork)
   const [codeToAudit, setCodeToAudit] = useState("");
   const [suiRecipient, setSuiRecipient] = useState("");
   const [statusMsg, setStatusMsg] = useState("");
