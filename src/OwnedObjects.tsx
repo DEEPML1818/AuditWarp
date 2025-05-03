@@ -1,10 +1,12 @@
+// src/OwnedObjects.tsx
 import { useEffect, useState } from 'react';
 import { Container, Heading, Text } from '@radix-ui/themes';
 import { networkConfig } from './networkConfig';
+import { motion } from 'framer-motion';
 
 export default function OwnedObjects() {
   const [messageIds, setMessageIds] = useState<string[]>([]);
-  const [error, setError] = useState<string>('');
+  const [error, setError]         = useState<string>('');
 
   useEffect(() => {
     async function fetchMessages() {
@@ -25,19 +27,22 @@ export default function OwnedObjects() {
   }, []);
 
   return (
-    <Container className="mt-4 text-cyber-base">
-      <Heading size="2" className="text-cyber-electric">
+    <motion.div
+      initial={{ opacity: 0, y: 20 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.5 }}
+      className="glass-panel p-6 mt-6"
+    >
+      <Heading size="2" className="text-neonPink mb-2">
         Audit Reports on IOTA
       </Heading>
 
-      {error && <Text className="text-cyber-red mt-2">{error}</Text>}
-
-      {!error && messageIds.length === 0 && (
-        <Text className="mt-2 text-gray-400">No reports yet.</Text>
-      )}
-
-      {messageIds.length > 0 && (
-        <ul className="list-disc list-inside mt-2 space-y-1">
+      {error ? (
+        <Text className="text-neonRed mt-2">{error}</Text>
+      ) : messageIds.length === 0 ? (
+        <Text className="text-gray-400 mt-2">No reports found.</Text>
+      ) : (
+        <ul className="list-disc list-inside space-y-1 mt-2">
           {messageIds.map((id) => (
             <li key={id}>
               <a
@@ -47,7 +52,7 @@ export default function OwnedObjects() {
                 )}/${id}`}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-cyber-lime hover:underline"
+                className="text-neonBlue hover:underline"
               >
                 {id}
               </a>
@@ -55,6 +60,6 @@ export default function OwnedObjects() {
           ))}
         </ul>
       )}
-    </Container>
+    </motion.div>
   );
 }
