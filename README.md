@@ -1,120 +1,35 @@
-# 🛡️ AuditWarp  
-**AI-Powered Smart Contract Audits for Move, Secured On-Chain with Sui + Cross-Chain Access via Wormhole**
+# IOTA dApp Starter Template
 
-### 🚀 Live Demo / DApp Simulator
+This dApp was created using `@iota/create-dapp` that sets up a basic React
+Client dApp using the following tools:
 
-Check out the live demo here: [🔗 AuditWarp DApp Simulator](https://audit-warp.vercel.app/)
+- [React](https://react.dev/) as the UI framework
+- [TypeScript](https://www.typescriptlang.org/) for type checking
+- [Vite](https://vitejs.dev/) for build tooling
+- [Radix UI](https://www.radix-ui.com/) for pre-built UI components
+- [ESLint](https://eslint.org/)
+- [`@iota/dapp-kit`](https://docs.iota.org/ts-sdk/dapp-kit) for
+  connecting to wallets and loading data
+- [pnpm](https://pnpm.io/) for package management
 
-### 📄 Sui Deployment (Testnet)
+## Starting your dApp
 
-- **Sui Contract Address (Testnet):** [`0x0d865f8b0ca4c353fbc142af6b74d88c4ec49d28c970b58c48b5599e1d314914`](https://testnet.suivision.xyz/package/0x0d865f8b0ca4c353fbc142af6b74d88c4ec49d28c970b58c48b5599e1d314914?tab=Code)  
-- **Deployer Address (Testnet):** [`0x768478578364d08dfc4e7c114a883602289256f0e603b64f58eb14ac288ab673`](https://testnet.suivision.xyz/account/0x768478578364d08dfc4e7c114a883602289256f0e603b64f58eb14ac288ab673)
-
-## 🧠 Architecture Overview
-
-- **User** sends code to **Frontend**  
-- **Frontend** calls the **AI Agent** _and_ directly writes to **IPFS**  
-- **AI Agent** sends analysis to a **Server**, which generates the **PDF Report**  
-- **PDF Report** is uploaded to **IPFS**  
-- **IPFS** then feeds into the **Sui NFT Mint**  
-- Finally, the **Wormhole SDK** bridges the proof‑NFT out to any **EVM Chain** and back  
-
----
-
-- **Frontend**: Built with `Next.js`, `Tailwind CSS`, `Radix UI`, `Vite`
-- **AI Engine**: Uses `OpenAI API` for LLM-based code analysis (pluggable)
-- **Storage**: Generates PDF reports → uploads to `IPFS` (via Pinata)
-- **Proof**: Mints Sui NFTs containing audit metadata and IPFS hash
-- **Cross-chain Access**: Wormhole SDK enables EVM ↔ Sui communication
-- **Wallets Supported**: `DappKit` (Sui), `Web3-react` (EVM)
-
----
-
-## ⚙️ Core Functions
-
-| Module             | Description |
-|--------------------|-------------|
-| `analyzeCode()`    | Sends Move code to AI for audit |
-| `generatePDF()`    | Converts audit results into styled PDF |
-| `uploadToIPFS()`   | Uploads generated PDF via Pinata API |
-| `mintAuditNFT()`   | Mints NFT on Sui with audit metadata |
-| `wormholeBridge()` | Facilitates cross-chain access & token payments |
-| `connectWallet()`  | Initializes wallet connection (Sui or EVM) |
-
----
-
-## 🚀 Installation & Local Setup
-
-### 1. Clone the Repo
+To install dependencies you can run
 
 ```bash
-git clone https://github.com/DEEPML1818/AuditWarp.git
-cd AuditWarp
+pnpm install
 ```
 
-### 2. Install Dependencies
+To start your dApp in development mode run
 
 ```bash
-npm install
-# or
-yarn install
+pnpm dev
 ```
 
-### 3. Create .env File
+## Building
+
+To build your app for deployment you can run
 
 ```bash
-NEXT_PUBLIC_OPENAI_KEY=       # your OpenAI secret key
-NEXT_PUBLIC_PINATA_API_KEY=          # your Pinata api key
-NEXT_PUBLIC_PINATA_SECRET_API_KEY=      # your Pinata secret key
-NEXT_PUBLIC_PACKAGE_ID=0x…         # your deployed Move package ID
+pnpm build
 ```
-
-### 4. Run Locally
-
-```bash
-npm run dev
-# or
-yarn dev
-```
-**Visit:** <http://localhost:3000>
-
-### 🛠 Dependencies
-- Next.js
-- Vite
-- OpenAI API
-- Pinata IPFS
-- Sui SDK / DappKit
-- Wormhole SDK
-- React-PDF
-- Web3-React
-
-### 📁 Folder Structure (Partial)
-
-auditwarp/
-├── components/
-│   └── AuditForm.jsx
-├── pages/
-│   ├── index.tsx
-├── lib/
-│   ├── ai.ts        # AI call logic
-│   ├── ipfs.ts      # Pinata interaction
-│   ├── nft.ts       # Minting audit NFTs
-│   └── wormhole.ts  # Cross-chain comms
-├── public/
-├── styles/
-├── .env
-└── README.md
-
-### 🧪 Coming Soon
-- Multi-agent AI audit consensus (voting mechanism)
-- Public explorer for verified audits
-- Tokenized credit system for audits
-- Plugin system for third-party LLMs and chains
-
-### 🤝 Contributing
-PRs and issues are welcome! See [CONTRIBUTING.md](./CONTRIBUTING.md) for guidelines.
-
-### 🔐 License
-MIT License © 2025 AuditWarp Contributors
-
-

@@ -1,42 +1,60 @@
-import { useCurrentAccount, useSuiClientQuery } from "@mysten/dapp-kit";
-import { Flex, Heading, Text } from "@radix-ui/themes";
+import { useEffect, useState } from 'react';
+import { Container, Heading, Text } from '@radix-ui/themes';
+import { networkConfig } from './networkConfig';
 
-export function OwnedObjects() {
-  const account = useCurrentAccount();
-  const { data, isPending, error } = useSuiClientQuery(
-    "getOwnedObjects",
-    {
-      owner: account?.address as string,
-    },
-    {
-      enabled: !!account,
-    },
-  );
+export default function OwnedObjects() {
+  const [messageIds, setMessageIds] = useState<string[]>([]);
+  const [error, setError] = useState<string>('');
 
-  if (!account) {
-    return;
-  }
+  useEffect(() => {
+    async function fetchMessages() {
+      try {
+        const idxUrl = networkConfig.devnet.indexerUrl;
+        const res = await fetch(
+          `${idxUrl}/api/indexer/v1/messages?index=AUDIT_REPORT`
+        );
+        if (!res.ok) throw new Error(`Indexer responded ${res.status}`);
+        const json = (await res.json()) as { data: string[] };
+        setMessageIds(json.data);
+      } catch (e: any) {
+        setError(e.message || 'Failed to fetch messages');
+      }
+    }
 
-  if (error) {
-    return <Flex>Error: {error.message}</Flex>;
-  }
-
-  if (isPending || !data) {
-    return <Flex>Loading...</Flex>;
-  }
+    fetchMessages();
+  }, []);
 
   return (
-    <Flex direction="column" my="2">
-      {data.data.length === 0 ? (
-        <Text>No objects owned by the connected wallet</Text>
-      ) : (
-        <Heading size="4">Objects owned by the connected wallet</Heading>
+    <Container className="mt-4 text-cyber-base">
+      <Heading size="2" className="text-cyber-electric">
+        Audit Reports on IOTA
+      </Heading>
+
+      {error && <Text className="text-cyber-red mt-2">{error}</Text>}
+
+      {!error && messageIds.length === 0 && (
+        <Text className="mt-2 text-gray-400">No reports yet.</Text>
       )}
-      {data.data.map((object) => (
-        <Flex key={object.data?.objectId}>
-          <Text>Object ID: {object.data?.objectId}</Text>
-        </Flex>
-      ))}
-    </Flex>
+
+      {messageIds.length > 0 && (
+        <ul className="list-disc list-inside mt-2 space-y-1">
+          {messageIds.map((id) => (
+            <li key={id}>
+              <a
+                href={`${networkConfig.devnet.jsonRpcUrl.replace(
+                  '/api',
+                  '/core/v2/messages'
+                )}/${id}`}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-cyber-lime hover:underline"
+              >
+                {id}
+              </a>
+            </li>
+          ))}
+        </ul>
+      )}
+    </Container>
   );
 }

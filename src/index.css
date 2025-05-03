@@ -1,0 +1,37 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* glassmorphic panel */
+@layer components {
+  .glass {
+    @apply bg-cyber-glass backdrop-blur-md border border-cyber-border rounded-lg;
+  }
+  /* subtle noise overlay */
+  .noise {
+    background: url('/noise.png') repeat;
+    opacity: 0.03;
+    position: absolute; inset: 0;
+    pointer-events: none;
+  }
+  /* scanlines overlay */
+  .scanlines {
+    background: repeating-linear-gradient(
+      0deg,
+      transparent,
+      transparent 1px,
+      rgba(0,0,0,0.05) 1px,
+      rgba(0,0,0,0.05) 2px
+    );
+    position: absolute; inset: 0;
+    mix-blend-mode: overlay;
+    pointer-events: none;
+  }
+}
+
+/* reduced-motion support */
+@media (prefers-reduced-motion: reduce) {
+  .animate-pulsate {
+    animation: none !important;
+  }
+}
